@@ -2,13 +2,23 @@ package com.example.demo;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+@Component
 @RestController
 @RequestMapping("api")
 public class WebApiController {
+	
+    // 1分ごとに実行
+    @Scheduled(fixedRate = 60000)
+    public void myTask() {
+        System.out.println("定期的なタスクが実行されました。");
+        // ここにタスクの実装を追加する
+    }
 
     @RequestMapping(value = "hello", produces = MediaType.TEXT_PLAIN_VALUE)
     public String hello() {
@@ -44,3 +54,5 @@ public class WebApiController {
         }
     }
 }
+
+
